@@ -3,39 +3,55 @@ import { Button } from "@/components/ui/button";
 
 export const BannerSection = () => {
   return (
-    <section className="py-20 md:py-28">
+    <section className="bg-[#111111] py-32 md:py-40 overflow-hidden">
       <div className="container-custom">
-        <div className="relative overflow-hidden rounded-sm">
+
+        <div className="relative overflow-hidden rounded-[32px]">
+
           <img
-            src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=1600&q=80"
-            alt="Promoção bolsas Dolutti"
-            className="w-full h-[500px] md:h-[600px] object-cover"
+            src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1800&q=80"
+            alt="Coleção Dolutti"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-foreground/30" />
-          <div className="absolute inset-0 flex items-center">
-            <div className="container-custom">
-              <div className="max-w-lg">
-                <span className="text-primary-foreground/80 text-xs tracking-[0.3em] uppercase">
-                  Oferta Especial
+
+          <div className="absolute inset-0 bg-black/50" />
+
+          <div className="relative z-10 px-8 md:px-16 py-24 md:py-40">
+
+            <div className="max-w-3xl">
+
+              <span className="uppercase tracking-[0.35em] text-xs text-white/70">
+                Coleção Exclusiva
+              </span>
+
+              <h2 className="font-display text-white text-5xl md:text-7xl lg:text-8xl leading-[0.95] mt-6">
+                Uma bolsa
+                <span className="block italic font-normal">
+                  conta histórias.
                 </span>
-                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-primary-foreground font-medium mt-4 leading-tight">
-                  Até 30% Off
-                  <br />
-                  Coleção Anterior
-                </h2>
-                <p className="text-primary-foreground/90 mt-4 max-w-sm">
-                  Bolsas selecionadas em couro legítimo com descontos exclusivos.
-                </p>
-                <Button variant="hero" size="lg" className="mt-8" asChild>
-                  <Link to="/produtos?promocao=true">Ver Ofertas</Link>
-                </Button>
-              </div>
+              </h2>
+
+              <p className="text-white/80 text-lg md:text-xl max-w-xl mt-8 leading-relaxed">
+                Criadas para acompanhar momentos importantes,
+                feitas com couro legítimo e acabamento artesanal.
+              </p>
+
+              <Button
+                size="lg"
+                className="mt-10 h-14 px-8 rounded-none bg-white text-black hover:bg-white/90"
+                asChild
+              >
+                <Link to="/produtos">
+                  Explorar Coleção
+                </Link>
+              </Button>
+
             </div>
+
           </div>
+
         </div>
-          <div className="text-center text-sm text-muted-foreground mt-6">
-          Frete grátis em compras acima de R$ 499 · Parcele em até 10x sem juros
-        </div>
+
       </div>
     </section>
   );

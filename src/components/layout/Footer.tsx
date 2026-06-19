@@ -1,155 +1,182 @@
 import { Link } from "react-router-dom";
-import { Instagram, Facebook, Twitter } from "lucide-react";
+import {
+  Instagram,
+  Facebook,
+  ArrowRight,
+} from "lucide-react";
 
-const footerLinks = {
-  shop: [
-    { label: "Novidades", href: "/produtos?categoria=novidades" },
-    { label: "Bolsas de Mão", href: "/produtos?categoria=bolsas-de-mao" },
-    { label: "Bolsas Tiracolo", href: "/produtos?categoria=tiracolo" },
-    { label: "Mochilas", href: "/produtos?categoria=mochilas" },
-    { label: "Carteiras", href: "/produtos?categoria=carteiras" },
-    { label: "Promoções", href: "/produtos?promocao=true" },
-  ],
-  help: [
-    { label: "FAQ", href: "/faq" },
-    { label: "Envio", href: "/envio" },
-    { label: "Trocas e Devoluções", href: "/trocas" },
-    { label: "Rastrear Pedido", href: "/rastrear" },
-    { label: "Contato", href: "/contato" },
-  ],
-  company: [
-    { label: "Sobre Nós", href: "/sobre" },
-    { label: "Sustentabilidade", href: "/sustentabilidade" },
-    { label: "Carreiras", href: "/carreiras" },
-    { label: "Imprensa", href: "/imprensa" },
-  ],
-};
+const footerLinks = [
+  {
+    title: "Coleção",
+    links: [
+      { label: "Novidades", href: "/produtos?categoria=novidades" },
+      { label: "Bolsas de Mão", href: "/produtos?categoria=bolsas-de-mao" },
+      { label: "Tiracolo", href: "/produtos?categoria=tiracolo" },
+      { label: "Mochilas", href: "/produtos?categoria=mochilas" },
+    ],
+  },
+  {
+    title: "Atendimento",
+    links: [
+      { label: "Contato", href: "/contato" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Trocas e Devoluções", href: "/trocas" },
+      { label: "Rastrear Pedido", href: "/rastrear" },
+    ],
+  },
+];
 
 export const Footer = () => {
   return (
-    <footer className="bg-secondary/50 border-t border-border">
-      <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <Link to="/" className="font-display text-2xl font-semibold tracking-tight">
-              <img src="logo_dolutti_header_rm.png" alt="Dolutti" className="h-7 sm:h-8 md:h-10 w-auto invert" />
-            </Link>
-            <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
-              Bolsas de couro legítimo com design atemporal e acabamento artesanal. Elegância que acompanha você por toda a vida.
+    <footer className="bg-[#0B0B0B] text-white overflow-hidden">
+
+      <div className="container-custom">
+
+        {/* HERO DO FOOTER */}
+        <div className="py-24 md:py-32 border-b border-white/10">
+
+          <div className="max-w-5xl">
+
+            <img
+              src="/logo_dolutti_header_rm.png"
+              alt="Dolutti"
+              className="h-12 md:h-16 w-auto mb-10"
+            />
+
+            <h2 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95]">
+              Couro legítimo.
+              <span className="block italic font-light">
+                Feito para durar.
+              </span>
+            </h2>
+
+            <p className="mt-8 text-white/60 max-w-2xl text-lg leading-relaxed">
+              Bolsas artesanais produzidas com materiais selecionados,
+              acabamento refinado e design atemporal.
+              Cada peça é criada para acompanhar sua jornada por muitos anos.
             </p>
-            <div className="flex gap-4 mt-6">
-              <a 
-                href="#" 
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a 
-                href="#" 
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a 
-                href="#" 
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-            </div>
+
           </div>
 
-          {/* Shop links */}
-          <div>
-            <h4 className="font-display text-lg font-medium mb-4">Comprar</h4>
-            <ul className="space-y-3">
-              {footerLinks.shop.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Help links */}
-          <div>
-            <h4 className="font-display text-lg font-medium mb-4">Ajuda</h4>
-            <ul className="space-y-3">
-              {footerLinks.help.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company links */}
-          <div>
-            <h4 className="font-display text-lg font-medium mb-4">Empresa</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
-        {/* Newsletter */}
-        <div className="mt-12 pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div>
-              <h4 className="font-display text-lg font-medium">Newsletter</h4>
-              <p className="text-sm text-muted-foreground mt-1">
-                Receba novidades e ofertas exclusivas
-              </p>
-            </div>
-            <div className="flex gap-2 max-w-md w-full md:w-auto">
+        {/* CONTEÚDO */}
+        <div className="grid lg:grid-cols-2 gap-20 py-20">
+
+          {/* NEWSLETTER */}
+          <div>
+
+            <span className="uppercase tracking-[0.3em] text-xs text-white/40">
+              Newsletter
+            </span>
+
+            <h3 className="font-display text-3xl md:text-4xl mt-4">
+              Receba novidades exclusivas
+            </h3>
+
+            <p className="text-white/60 mt-4 max-w-md leading-relaxed">
+              Conheça lançamentos, coleções limitadas e conteúdos
+              exclusivos antes de todo mundo.
+            </p>
+
+            <div className="mt-10 max-w-lg border-b border-white/20 flex items-center pb-4">
+
               <input
                 type="email"
-                placeholder="Seu e-mail"
-                className="flex-1 px-4 py-2 bg-background border border-border rounded-sm text-sm focus:outline-none focus:ring-1 focus:ring-ring"
+                placeholder="Seu melhor e-mail"
+                className="flex-1 bg-transparent outline-none placeholder:text-white/30"
               />
-              <button className="px-6 py-2 bg-primary text-primary-foreground text-sm tracking-wide uppercase hover:bg-primary/90 transition-colors">
-                Inscrever
+
+              <button className="flex items-center gap-2 uppercase tracking-[0.25em] text-xs hover:opacity-70 transition">
+                Enviar
+                <ArrowRight size={14} />
               </button>
+
             </div>
+
           </div>
+
+          {/* LINKS */}
+          <div className="grid grid-cols-2 gap-12">
+
+            {footerLinks.map((group) => (
+              <div key={group.title}>
+
+                <h4 className="uppercase tracking-[0.25em] text-xs text-white/40 mb-6">
+                  {group.title}
+                </h4>
+
+                <ul className="space-y-4">
+
+                  {group.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        to={link.href}
+                        className="text-white/70 hover:text-white transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+
+                </ul>
+
+              </div>
+            ))}
+
+          </div>
+
         </div>
 
-        {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
-          <p>© 2026 Dolutti. Todos os direitos reservados.</p>
-          <div className="flex gap-6">
-            <Link to="/privacidade" className="hover:text-foreground transition-colors">
-              Privacidade
+        {/* BOTTOM */}
+        <div className="border-t border-white/10 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+
+          <div className="flex items-center gap-8 text-sm text-white/40">
+
+            <Link
+              to="/privacidade"
+              className="hover:text-white transition-colors"
+            >
+              Política de Privacidade
             </Link>
-            <Link to="/termos" className="hover:text-foreground transition-colors">
+
+            <Link
+              to="/termos"
+              className="hover:text-white transition-colors"
+            >
               Termos de Uso
             </Link>
+
           </div>
+
+          <div className="flex items-center gap-5">
+
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="text-white/50 hover:text-white transition-colors"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+
+            <a
+              href="#"
+              aria-label="Facebook"
+              className="text-white/50 hover:text-white transition-colors"
+            >
+              <Facebook className="h-5 w-5" />
+            </a>
+
+          </div>
+
+          <p className="text-xs text-white/30 text-center md:text-right">
+            © 2026 Dolutti. Todos os direitos reservados.
+          </p>
+
         </div>
+
       </div>
+
     </footer>
   );
 };

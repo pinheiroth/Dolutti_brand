@@ -1,155 +1,107 @@
 import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
 
-import heroBag from "@/assets/hero-bag.jpg";
-import bag2 from "@/assets/bolsa_dominique.jpg";
-import bag3 from "@/assets/bolsa_marina.jpg";
-
-const products = [
-  {
-    image: heroBag,
-    name: "Tote Milano",
-    price: "R$ 1.290",
-  },
-  {
-    image: bag2,
-    name: "Dominique",
-    price: "R$ 1.490",
-  },
-  {
-    image: bag3,
-    name: "Marina",
-    price: "R$ 990",
-  },
-];
+import heroBag from "@/assets/img_hero.png";
 
 export const HeroSection = () => {
-  const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
+  const { scrollY } = useScroll();
 
-  // autoplay
-  useEffect(() => {
-    const interval = setInterval(() => {
-      paginate(1);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  const scale = useTransform(scrollY, [0, 600], [1, 0.88]);
 
-  const paginate = (newDirection) => {
-    setDirection(newDirection);
-    setIndex((prev) => (prev + newDirection + products.length) % products.length);
-  };
+  const borderRadius = useTransform(
+    scrollY,
+    [0, 400],
+    [0, 32]
+  );
+
+  const opacity = useTransform(
+    scrollY,
+    [0, 250],
+    [1, 0]
+  );
+
+  const y = useTransform(
+    scrollY,
+    [0, 300],
+    [0, -120]
+  );
 
   return (
-    <section className="relative overflow-hidden bg-secondary/40">
-      <div className="container-custom grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[88vh] py-16 lg:py-24">
+    <section className="relative h-[160vh] bg-[#0b0b0b]">
+      <div className="sticky top-0 h-screen overflow-hidden">
+        <motion.div
+          style={{
+            scale,
+            borderRadius,
+          }}
+          className="relative h-full w-full overflow-hidden"
+        >
+          <img
+            src={heroBag}
+            alt="Bolsa artesanal em couro"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
 
-        {/* TEXT */}
-        <div className="relative z-10 max-w-xl animate-fade-in">
-          <span className="eyebrow mb-6">Coleção Outono · 2026</span>
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/25" />
 
-          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light leading-[1.05] mt-4">
-            Couro que conta
-            <span className="block italic font-medium text-accent mt-2">
-              a sua história.
-            </span>
-          </h1>
+          {/* Gradiente */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-          <p className="text-base md:text-lg text-muted-foreground mt-6 leading-relaxed max-w-md">
-            Bolsas artesanais em couro legítimo, curtido ao vegetal e costuradas à mão.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 mt-10">
-            <Button variant="primary" size="xl" asChild>
-              <Link to="/produtos">Ver Coleção</Link>
-            </Button>
-            <Button variant="minimal" size="xl" asChild>
-              <Link to="/sobre">Nossa História</Link>
-            </Button>
-          </div>
-        </div>
-
-        {/* IMAGE CAROUSEL */}
-        <div className="relative w-full max-w-lg mx-auto animate-fade-in" style={{ perspective: 1000 }}>
-
-          {/* glow */}
-          <div className="absolute -inset-6 bg-gradient-to-br from-accent/20 via-transparent to-transparent rounded-sm blur-2xl" />
-
-          <div className="relative aspect-[4/5] overflow-hidden rounded-sm shadow-product">
-
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={index}
-                src={products[index].image}
-                alt={products[index].name}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="absolute inset-0 w-full h-full object-cover"
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                onDragEnd={(e, info) => {
-                  if (info.offset.x < -50) paginate(1);
-                  if (info.offset.x > 50) paginate(-1);
-                }}
-              />
-            </AnimatePresence>
-
-          </div>
-
-          {/* CARD */}
+          {/* Conteúdo */}
           <motion.div
-            key={index + "card"}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="absolute -bottom-4 -left-4 sm:bottom-8 sm:-left-8 bg-background border border-border px-5 py-4 shadow-medium hidden sm:block"
+            style={{
+              opacity,
+              y,
+            }}
+            className="absolute inset-0 z-20 flex items-center"
           >
-            <div className="text-xs tracking-widest uppercase text-muted-foreground">
-              Destaque
-            </div>
-            <div className="font-display text-lg font-medium mt-1">
-              {products[index].name}
-            </div>
-            <div className="text-sm text-accent mt-0.5">
-              {products[index].price}
+            <div className="container-custom ">
+              <div className="max-w-3xl">
+
+                <span className="block text-white/80 uppercase tracking-[0.35em] text-xs md:text-sm mb-6">
+                  Coleção 2026
+                </span>
+
+                <h1 className="font-display text-white text-5xl md:text-7xl lg:text-8xl xl:text-[110px] leading-[0.9] font-light">
+                  Bolsas em couro
+                  <span className="block font-normal">
+                    feitas à mão.
+                  </span>
+                </h1>
+
+                <p className="mt-8 text-white/80 text-lg md:text-xl max-w-xl leading-relaxed">
+                  Design atemporal, couro legítimo e produção artesanal.
+                  Peças criadas para acompanhar você por muitos anos.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 mt-10">
+                  <Button
+                    size="lg"
+                    className="h-14 px-8 rounded-none bg-white text-black hover:bg-white/90"
+                    asChild
+                  >
+                    <Link to="/produtos">
+                      Explorar Coleção
+                    </Link>
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="h-14 px-8 rounded-none border-white text-white bg-transparent hover:bg-white hover:text-black"
+                    asChild
+                  >
+                    <Link to="/sobre">
+                      Nossa História
+                    </Link>
+                  </Button>
+                </div>
+              </div>
             </div>
           </motion.div>
-
-          {/* CONTROLS */}
-          <div className="absolute bottom-4 right-4 flex gap-2 z-10">
-            <button
-              onClick={() => paginate(-1)}
-              className="bg-white/80 backdrop-blur px-3 py-1 text-sm rounded"
-            >
-              ←
-            </button>
-            <button
-              onClick={() => paginate(1)}
-              className="bg-white/80 backdrop-blur px-3 py-1 text-sm rounded"
-            >
-              →
-            </button>
-          </div>
-
-          {/* DOTS */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-            {products.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIndex(i)}
-                className={`h-2 rounded-full transition-all ${
-                  i === index ? "w-6 bg-accent" : "w-2 bg-white/50"
-                }`}
-              />
-            ))}
-          </div>
-
-        </div>
+        </motion.div>
       </div>
     </section>
   );
